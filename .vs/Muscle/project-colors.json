@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "12932dfd-a979-483a-ae0d-0c8647ec1a3e": {
+      "ProjectGuid": "12932dfd-a979-483a-ae0d-0c8647ec1a3e",
+      "DisplayName": "Muscle",
+      "ColorIndex": 0
+    },
+    "280c2483-a962-4afd-ac93-6f863d386521": {
+      "ProjectGuid": "280c2483-a962-4afd-ac93-6f863d386521",
+      "DisplayName": "Muscle.Entities",
+      "ColorIndex": 1
+    },
+    "a22e46d9-54b4-4893-afb3-135d4c0cbed1": {
+      "ProjectGuid": "a22e46d9-54b4-4893-afb3-135d4c0cbed1",
+      "DisplayName": "Muscle.DataService",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}
