@@ -22,12 +22,89 @@
 ## Данные
 ### База данных пользователя
 #### Subscribtion
-| name          | type          |
-| ------------- |:-------------:|
-| id            | int           |
-| name          | string        |
-| price         | float         |
-| count         | int           |
+| name            | type          |
+| --------------- |:-------------:|
+| id              | int           |
+| name            | string        |
+| price           | float         |
+| count           | int           |
+
+#### User
+| name            | type          |
+| --------------- |:-------------:|
+| id              | int           |
+| name            | string        |
+| dob             | datatime      |
+| mail            | string        |
+| password        | string        |
+| phone           | string        |
+| id_role         | int           |
+
+#### Subscribtion_to_User
+| name            | type          |
+| --------------- |:-------------:|
+| id_subscription | int           |
+| id_user         | int           |
+| start_data      | datatime      |
+
+#### Role
+| name            | type          |
+| --------------- |:-------------:|
+| id              | int           |
+| name            | string        |
+| descr           | string        |
+
+#### Documet
+| name            | type          |
+| --------------- |:-------------:|
+| id              | int           |
+| name            | string        |
+| photo           | string        |
+| descr           | string        |
+| id_user         | int           |
+
+#### Coach
+| name            | type          |
+| --------------- |:-------------:|
+| id              | int           |
+| descr           | string        |
+| id_direction    | int           |
+
+### База данных оборудования
+#### Equipment
+| name            | type          |
+| --------------- |:-------------:|
+| id | int |
+| name | string |
+| descr | string |
+
+#### Hall
+| name            | type          |
+| --------------- |:-------------:|
+| id              | int           |
+| name            | string        |
+| id_building     | int           |
+
+#### Equipment_to_Hall
+| name            | type          |
+| --------------- |:-------------:|
+| id_equipment    | int           |
+| id_hall         | int           |
+| quantity        | int           |
+
+#### Building
+| name            | type          |
+| --------------- |:-------------:|
+| id              | int           |
+| name            | string        |
+
+#### Direction
+| name            | type          |
+| --------------- |:-------------:|
+| id              | int     |
+| name            | string |
+| id_building     | int           |
+| descr           | string |
 
 ## Ипользованные библиотеки:
 * EntityFrameworkCore - технология, которая используется для связи с базами данных, позволяет взаимодействовать с СУБД
