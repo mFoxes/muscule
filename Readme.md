@@ -110,3 +110,6 @@
 * EntityFrameworkCore - технология, которая используется для связи с базами данных, позволяет взаимодействовать с СУБД
 * EntityFrameworkCore.Tools - инструменты для упраления миграциями и формирования DBContext
 * Npgsql.EntityFrameworkCore.PostgreSQL - библиотека для связи с СУБД postgeSQL
+
+## Макет Web-приложения:
+Url - https://www.figma.com/file/VU79Wla0mMDLVgfdOf6LrT/Untitled?node-id=0%3A1
