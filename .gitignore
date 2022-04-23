@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+musculefront/node_modules
+musculefront/.pnp
+musculefront/.pnp.js
+
+# testing
+musculefront/coverage
+
+# production
+musculefront/build
+
+# misc
+musculefront/.DS_Store
+musculefront/.env.local
+musculefront/.env.development.local
+musculefront/.env.test.local
+musculefront/.env.production.local
+
+musculefront/npm-debug.log*
+musculefront/yarn-debug.log*
+musculefront/yarn-error.log*
