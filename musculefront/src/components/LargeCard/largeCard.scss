@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+
+.large-card {
+    width: 550px;
+    height: 300px;
+
+    padding: 25px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+
+    background: $mainColorBG1;
+
+    // .large-card__title
+    &__title {
+
+    }
+
+    // .large-card__bottom
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+    }
+
+    // .large-card__left
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    // .large-card__right
+    &__right {
+    }
+}
+._icon {
+    // ._icon-ruble
+    &-ruble {
+        display: flex;
+        gap: 5px;
+    }
+}

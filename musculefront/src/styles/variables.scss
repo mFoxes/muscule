@@ -1,0 +1,90 @@
+// Основные цвета
+$mainColor: #FFFFFF;
+$mainColorBlack: #393939;
+$mainColorBG1: #C4C4C4;
+$mainColorBG2: #EFEFEF;
+
+// НАСТРОЙКИ ===============================================================================================================================================================================================================================================================================================
+// Минимальная ширина страницы
+$minWidth: 320px;
+// Ширина полотна (макета)
+$maxWidth: 1920px;
+// Общий отступ у контейнера
+// (30 = по 15px слева и справа, 0 = нет отступа)
+$containerPadding: 80px;
+// Ширина ограничивающего контейнера (0 = нет ограничения)
+$maxWidthContainer: calc(1200px - $containerPadding);
+
+// Ширина страбатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+
+// Брейк-поинты
+$pc: $containerWidth; // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$tablet: 992px; // Планшеты, некоторые телефоны в горизонтальном положении
+$mobile: 768px; // Телефоны L
+$mobileSmall: 480px; // Телефоны S
+
+// Ограничивающий контейнер ======================================================================================================================================================================================================================
+
+[class*="__container"] {
+    max-width: $maxWidthContainer;
+    box-sizing: content-box;
+
+    min-width: $maxWidthContainer;
+    
+    padding-left: calc($containerPadding / 2);
+    padding-right: calc($containerPadding / 2);
+    margin: 0;
+}
+
+
+%ic {
+    font-family: "icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class*="_icon-"] {
+    &:before {
+        @extend %ic;
+        display: block;
+    }
+
+    &::after {
+        @extend %ic;
+        display: block;
+    }
+}
+
+._icon-account:before {
+    content: "\e900";
+    color: #fff;
+}
+._icon-exit:before {
+    content: "\e901";
+}
+._icon-triangle:before {
+    content: "\e902";
+}
+._icon-ruble::after {
+    content: "\e903";
+}
+
+@font-face {
+    font-family: 'icons';
+    src:  url('fonts/icons.eot?i4pvft');
+    src:  url('fonts/icons.eot?i4pvft#iefix') format('embedded-opentype'),
+      url('fonts/icons.ttf?i4pvft') format('truetype'),
+      url('fonts/icons.woff?i4pvft') format('woff'),
+      url('fonts/icons.svg?i4pvft#icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
