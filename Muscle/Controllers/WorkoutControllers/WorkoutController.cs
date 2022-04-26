@@ -25,7 +25,7 @@ namespace Muscle.Controllers.WorkoutControllers
         [HttpPost]
         public async Task<IActionResult> Create(WorkoutDto workout)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var config = new MapperConfiguration(x => x.CreateMap<WorkoutDto, Workout>());
                 var mapper = new Mapper(config);
@@ -52,6 +52,21 @@ namespace Muscle.Controllers.WorkoutControllers
         {
             var workout = await _workoutRepository.Get(id);
             return Ok(workout);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, Workout workout)
+        {
+            var result = await _workoutRepository.Update(id, workout);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var result = await _workoutRepository.Delete(id);
+            if (result) return Ok("Delete success");
+            return BadRequest("Error during deletion");
         }
     }
 }
