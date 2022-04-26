@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Muscle.DataService.Migrations.EquipmentDb
 {
     [DbContext(typeof(EquipmentDbContext))]
-    [Migration("20220411115159_change type of Name field in building table")]
-    partial class changetypeofNamefieldinbuildingtable
+    [Migration("20220424163307_primary key remove")]
+    partial class primarykeyremove
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -94,23 +94,16 @@ namespace Muscle.DataService.Migrations.EquipmentDb
 
             modelBuilder.Entity("Muscle.Entities.DbSet.DbSetForEquipmentDb.EquipmentHall", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int?>("EquipmentId")
+                    b.Property<int>("EquipmentId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("HallId")
+                    b.Property<int>("HallId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("EquipmentId");
+                    b.HasKey("EquipmentId", "HallId");
 
                     b.HasIndex("HallId");
 
@@ -165,11 +158,15 @@ namespace Muscle.DataService.Migrations.EquipmentDb
                 {
                     b.HasOne("Muscle.Entities.DbSet.DbSetForEquipmentDb.Equipment", "Equipment")
                         .WithMany("EquipmentHalls")
-                        .HasForeignKey("EquipmentId");
+                        .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Muscle.Entities.DbSet.DbSetForEquipmentDb.Hall", "Hall")
                         .WithMany("EquipmentHalls")
-                        .HasForeignKey("HallId");
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Equipment");
 

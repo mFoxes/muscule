@@ -10,6 +10,12 @@ namespace Muscle.DataService.Data
 {
     public class EquipmentDbContext : DbContext
     {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EquipmentHall>()
+                .HasKey(x => new { x.EquipmentId, x.HallId });
+        }
+
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Direction> Directions { get; set; }
         public virtual DbSet<Equipment> Equipments { get; set; }

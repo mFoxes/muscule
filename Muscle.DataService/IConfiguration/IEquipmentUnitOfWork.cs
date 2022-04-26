@@ -1,4 +1,5 @@
-﻿using Muscle.DataService.IRepository.Repository.EquipmentRepository;
+﻿using Muscle.DataService.IRepository.IRepositoryEquipmentDbContext;
+using Muscle.DataService.IRepository.Repository.EquipmentRepository;
 using Muscle.Entities.DbSet.DbSetForEquipmentDb;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace Muscle.DataService.IConfiguration
 {
     public interface IEquipmentUnitOfWork
     {
-        GenericRepository<Building> BuildingRepository { get; }
-        GenericRepository<Direction> DirectionRepository { get; }
-        GenericRepository<Equipment> EquipmentRepository { get; }
-        GenericRepository<EquipmentHall> EquipmentHallRepository { get; }
-        GenericRepository<Hall> HallRepository { get; }
-
+        IBuildingRepository BuildingRepository { get; }
+        IDirectionRepository DirectionRepository { get; }
+        IEquipmentRepository EquipmentRepository { get; }
+        IEquipmentHallRepository EquipmentHallRepository { get; }
+        IHallRepository HallRepository { get; }
+        
         Task Save();
     }
 }

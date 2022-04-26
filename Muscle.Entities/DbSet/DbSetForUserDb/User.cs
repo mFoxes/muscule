@@ -15,7 +15,7 @@ namespace Muscle.Entities.DbSet.DbSetForUserDb
         public string Password { get; set; }
         public string Email { get; set; }
 
-        public int? RoleId { get; set; }
+        public int RoleId { get; set; }
         [JsonIgnore]
         public Role Role { get; set; }
         

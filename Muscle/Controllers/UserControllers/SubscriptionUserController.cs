@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Muscle.DataService.IConfiguration;
 using Muscle.Entities.DbSet.DbSetForUserDb;
+using Muscle.Entities.DbSet.Dtos.DtosForUserDb.Incoming;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +37,15 @@ namespace Muscle.Controllers.UserControllers
 
         [HttpPost]
         [Route("AddSubscriptionUser", Name = "AddSubscriptionUser")]
-        public async Task<IActionResult> Add(SubscriptionUser subscriptionUser)
+        public async Task<IActionResult> Add(SubscriptionUserDto subscriptionUser)
         {
-            var res = await _userUnitOfWork.SubscriptionUserRepository.AddAsync(subscriptionUser);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<SubscriptionUserDto, SubscriptionUser>());
+            var mapper = new Mapper(config);
+
+            var newSubscriptionUser = mapper.Map<SubscriptionUserDto, SubscriptionUser>(subscriptionUser);
+            newSubscriptionUser.VisitCount = 0;
+
+            var res = await _userUnitOfWork.SubscriptionUserRepository.AddAsync(newSubscriptionUser);
             if (!res)
                 return BadRequest("Error while adding");
             await _userUnitOfWork.Save();
@@ -63,7 +71,7 @@ namespace Muscle.Controllers.UserControllers
             if (subscriptionUserForUpdate == null)
                 return BadRequest("Item does not exist");
 
-            subscriptionUserForUpdate.StartData = newSubscriptionUser.StartData;
+            subscriptionUserForUpdate.VisitCount = newSubscriptionUser.VisitCount;
 
             var res = await _userUnitOfWork.SubscriptionUserRepository.UpdateAsync(subscriptionUserForUpdate);
             if (!res)

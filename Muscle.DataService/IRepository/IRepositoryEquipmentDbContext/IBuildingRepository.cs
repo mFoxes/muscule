@@ -9,6 +9,6 @@ namespace Muscle.DataService.IRepository.IRepositoryEquipmentDbContext
 {
     public interface IBuildingRepository : IGenericRepository<Building>
     {
-
+        Task<IEnumerable<Building>> GetAllWithHallAndEquipment();
     }
 }

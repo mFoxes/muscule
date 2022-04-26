@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Muscle.DataService.IConfiguration;
 using Muscle.Entities.DbSet.DbSetForEquipmentDb;
+using Muscle.Entities.DbSet.Dtos.DtosForEquipmentDb.Incoming;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -30,11 +32,24 @@ namespace Muscle.Controllers.EquipmentControllers
             return Ok(res);
         }
 
+        [HttpGet]
+        [Route("GetAllBuildingsWithHallAndEquipments", Name = "GetAllBuildingsWithHallAndEquipments")]
+        public async Task<IActionResult> GetBuildingsWithHallAndEquipment()
+        {
+            var res = await _equipmentUnitOfWork.BuildingRepository.GetAllWithHallAndEquipment();
+            return Ok(res);
+        }
+
         [HttpPost]
         [Route("AddBuilding", Name = "AddBuilding")]
-        public async Task<IActionResult> AddBuilding(Building building)
+        public async Task<IActionResult> AddBuilding(BuildingDto building)
         {
-            var res = await _equipmentUnitOfWork.BuildingRepository.AddAsync(building);
+            var config = new MapperConfiguration(x => x.CreateMap<BuildingDto, Building>());
+            var mapper = new Mapper(config);
+
+            var newBuilding = mapper.Map<BuildingDto, Building>(building);
+
+            var res = await _equipmentUnitOfWork.BuildingRepository.AddAsync(newBuilding);
             if (!res)
                 return BadRequest("Error while adding");
             await _equipmentUnitOfWork.Save();

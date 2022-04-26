@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Muscle.DataService.Migrations
 {
-    public partial class initialuserDbContext : Migration
+    public partial class InitUserDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,7 +68,8 @@ namespace Muscle.DataService.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    DirectionId = table.Column<int>(type: "integer", nullable: false)
+                    DirectionId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -79,21 +80,25 @@ namespace Muscle.DataService.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Coach_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "SubscriptionUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StartData = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     SubscriptionId = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false)
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    VisitCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubscriptionUsers", x => x.Id);
+                    table.PrimaryKey("PK_SubscriptionUsers", x => new { x.SubscriptionId, x.UserId });
                     table.ForeignKey(
                         name: "FK_SubscriptionUsers_Subscriptions_SubscriptionId",
                         column: x => x.SubscriptionId,
@@ -131,14 +136,14 @@ namespace Muscle.DataService.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Coach_UserId",
+                table: "Coach",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Documents_CoachId",
                 table: "Documents",
                 column: "CoachId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SubscriptionUsers_SubscriptionId",
-                table: "SubscriptionUsers",
-                column: "SubscriptionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubscriptionUsers_UserId",

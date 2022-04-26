@@ -1,4 +1,5 @@
 ﻿using Muscle.DataService.IConfiguration;
+using Muscle.DataService.IRepository.IRepositoryEquipmentDbContext;
 using Muscle.DataService.IRepository.Repository.EquipmentRepository;
 using Muscle.Entities.DbSet.DbSetForEquipmentDb;
 using System;
@@ -12,63 +13,64 @@ namespace Muscle.DataService.Data
     public class EquipmentUnitOfWork : IDisposable, IEquipmentUnitOfWork
     {
         private readonly EquipmentDbContext _context;
-        private GenericRepository<Building> buildingRepository;
-        private GenericRepository<Direction> directionRepository;
-        private GenericRepository<Equipment> equipmentRepository;
-        private GenericRepository<EquipmentHall> equipmentHallRepository;
-        private GenericRepository<Hall> hallRepository;
+        
+        private IBuildingRepository buildingRepository;
+        private IDirectionRepository directionRepository;
+        private IEquipmentRepository equipmentRepository;
+        private IEquipmentHallRepository equipmentHallRepository;
+        private IHallRepository hallRepository;
 
         public EquipmentUnitOfWork(EquipmentDbContext context)
         {
             _context = context;
         }
 
-        public GenericRepository<Building> BuildingRepository
+        public IBuildingRepository BuildingRepository
         {
             get
             {
                 if(buildingRepository == null)
-                    buildingRepository = new GenericRepository<Building>(_context);
+                    buildingRepository = new BuildingRepository(_context);
                 return buildingRepository;
             }
         }
 
-        public GenericRepository<Direction> DirectionRepository
+        public IDirectionRepository DirectionRepository
         {
             get
             {
                 if (directionRepository == null)
-                    directionRepository = new GenericRepository<Direction>(_context);
+                    directionRepository = new DirectionRepository(_context);
                 return directionRepository;
             }
         }
 
-        public GenericRepository<Equipment> EquipmentRepository
+        public IEquipmentRepository EquipmentRepository
         {
             get
             {
                 if(equipmentRepository == null)
-                    equipmentRepository = new GenericRepository<Equipment>(_context);
+                    equipmentRepository = new EquipmentRepository(_context);
                 return equipmentRepository;
             }
         }
 
-        public GenericRepository<EquipmentHall> EquipmentHallRepository
+        public IEquipmentHallRepository EquipmentHallRepository
         {
             get
             {
                 if(equipmentHallRepository == null)
-                    equipmentHallRepository = new GenericRepository<EquipmentHall>(_context);
+                    equipmentHallRepository = new EquipmentHallRepository(_context);
                 return equipmentHallRepository;
             }
         }
 
-        public GenericRepository<Hall> HallRepository
+        public IHallRepository HallRepository
         {
             get
             {
                 if(hallRepository == null)
-                    hallRepository = new GenericRepository<Hall>(_context);
+                    hallRepository = new HallRepository(_context);
                 return hallRepository;
             }
         }

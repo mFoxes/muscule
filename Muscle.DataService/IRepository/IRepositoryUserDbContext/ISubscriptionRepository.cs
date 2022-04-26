@@ -9,6 +9,6 @@ namespace Muscle.DataService.IRepository.IRepositoryUserDbContext
 {
     public interface ISubscriptionRepository : IGenericRepository<Subscription>
     {
-
+        Task<IEnumerable<SubscriptionUser>> GetUsers(int subscriptionId);
     }
 }

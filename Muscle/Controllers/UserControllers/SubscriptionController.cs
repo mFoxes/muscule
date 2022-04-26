@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Muscle.DataService.IConfiguration;
 using Muscle.Entities.DbSet.DbSetForUserDb;
+using Muscle.Entities.DbSet.Dtos.DtosForUserDb.Incoming;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,11 +35,23 @@ namespace Muscle.Controllers.UserControllers
             return Ok(res);
         }
 
+        [HttpGet]
+        [Route("GetSubscriptions's users", Name = "GetSubscriptions's users")]
+        public async Task<IActionResult> GetUsers(int id)
+        {
+            var res = await _userUnitOfWork.SubscriptionRepository.GetUsers(id);
+            return Ok(res);
+        }
+
         [HttpPost]
         [Route("AddSubscription", Name = "AddSubscription")]
-        public async Task<IActionResult> Add(Subscription subscription)
+        public async Task<IActionResult> Add(SubscriptionDto subscription)
         {
-            var res = await _userUnitOfWork.SubscriptionRepository.AddAsync(subscription);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<SubscriptionDto, Subscription>());
+            var mapper = new Mapper(config);
+            var newSubscription = mapper.Map<SubscriptionDto, Subscription>(subscription);
+
+            var res = await _userUnitOfWork.SubscriptionRepository.AddAsync(newSubscription);
             if (!res)
                 return BadRequest("Error while adding");
             await _userUnitOfWork.Save();

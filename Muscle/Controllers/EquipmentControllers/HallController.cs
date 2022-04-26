@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Muscle.DataService.IConfiguration;
 using Muscle.Entities.DbSet.DbSetForEquipmentDb;
+using Muscle.Entities.DbSet.Dtos.DtosForEquipmentDb.Incoming;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +37,13 @@ namespace Muscle.Controllers.EquipmentControllers
 
         [HttpPost]
         [Route("AddHall", Name = "AddHall")]
-        public async Task<IActionResult> Add(Hall hall)
+        public async Task<IActionResult> Add(HallDto hall)
         {
-            var res = await _equipmentUnitOfWork.HallRepository.AddAsync(hall);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<HallDto, Hall>());
+            var mapper = new Mapper(config);
+            Hall newHall = mapper.Map<HallDto, Hall>(hall);
+
+            var res = await _equipmentUnitOfWork.HallRepository.AddAsync(newHall);
             if (!res)
                 return BadRequest("Error while adding");
             await _equipmentUnitOfWork.Save();

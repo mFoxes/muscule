@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Muscle.DataService.Migrations.EquipmentDb
 {
-    public partial class initialEquipmentDbContext : Migration
+    public partial class InitEquipmentDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace Muscle.DataService.Migrations.EquipmentDb
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<int>(type: "integer", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,27 +103,26 @@ namespace Muscle.DataService.Migrations.EquipmentDb
                 name: "EquipmentHalls",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EquipmentId = table.Column<int>(type: "integer", nullable: false),
+                    HallId = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
-                    EquipmentId = table.Column<int>(type: "integer", nullable: true),
-                    HallId = table.Column<int>(type: "integer", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EquipmentHalls", x => x.Id);
+                    table.PrimaryKey("PK_EquipmentHalls", x => new { x.EquipmentId, x.HallId });
                     table.ForeignKey(
                         name: "FK_EquipmentHalls_Equipments_EquipmentId",
                         column: x => x.EquipmentId,
                         principalTable: "Equipments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EquipmentHalls_Halls_HallId",
                         column: x => x.HallId,
                         principalTable: "Halls",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -135,11 +134,6 @@ namespace Muscle.DataService.Migrations.EquipmentDb
                 name: "IX_Directions_BuildingId",
                 table: "Directions",
                 column: "BuildingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EquipmentHalls_EquipmentId",
-                table: "EquipmentHalls",
-                column: "EquipmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EquipmentHalls_HallId",

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Muscle.DataService.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20220411105524_I dont know")]
-    partial class Idontknow
+    [Migration("20220424162731_Init UserDB")]
+    partial class InitUserDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,23 +88,16 @@ namespace Muscle.DataService.Migrations
 
             modelBuilder.Entity("Muscle.Entities.DbSet.DbSetForUserDb.SubscriptionUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("StartData")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int>("SubscriptionId")
                         .HasColumnType("integer");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.Property<int>("VisitCount")
+                        .HasColumnType("integer");
 
-                    b.HasIndex("SubscriptionId");
+                    b.HasKey("SubscriptionId", "UserId");
 
                     b.HasIndex("UserId");
 

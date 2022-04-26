@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "X/CIKh0+HQvMU3FxsaPWZi3ExQpAT1IMT8Hs9E5DaW1aEKiVY2dYoIYkM9wF9BNisXyGsQFdGTsjvAkYAaWQVA==",
+  "dgSpecHash": "1DVxi6BXe9F54UW05KEKVLrG9RQjE3L8VLb+U94765kPES4vmN/UjaAmjp0x6c2rRP4LdQkLS90T3QRImImawA==",
   "success": true,
   "projectFilePath": "D:\\UniversityProjects\\SUBD\\Muscle2.0\\Muscle\\Muscle.DataService\\Muscle.DataService.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ereme\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\ereme\\.nuget\\packages\\dnsclient\\1.6.0\\dnsclient.1.6.0.nupkg.sha512",
     "C:\\Users\\ereme\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ereme\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.15\\microsoft.aspnetcore.cryptography.internal.5.0.15.nupkg.sha512",

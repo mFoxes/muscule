@@ -8,8 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 using Muscle.DataService.Data;
 using Muscle.DataService.IConfiguration;
+using Muscle.DataService.IRepository.IRepositoryWorkoutDb;
+using Muscle.DataService.IRepository.Repository.WorkoutRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,11 +38,15 @@ namespace Muscle
             services.AddDbContext<EquipmentDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("SecondConnection")));
 
+            services.AddSingleton<IMongoClient, MongoClient>(options => new MongoClient(Configuration.GetConnectionString("MongoDb")));
+
 
             services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
             services.AddScoped<IEquipmentUnitOfWork, EquipmentUnitOfWork>();
+            services.AddTransient<IWorkoutRepository, WorkoutRepository>();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(option => option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Muscle", Version = "v1" });

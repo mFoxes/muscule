@@ -2,8 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Muscle.DataService.Data;
 using Muscle.DataService.IConfiguration;
+using Muscle.DataService.IRepository.IRepositoryWorkoutDb;
 using Muscle.Entities.DbSet.DbSetForUserDb;
+using Muscle.Entities.DbSet.DbSetForWorkoutDb;
+using Muscle.Entities.DbSet.Dtos.DtosForUserDb.Incoming;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Muscle.Controllers.UserControllers
@@ -11,10 +15,12 @@ namespace Muscle.Controllers.UserControllers
     
     public class UserController : BaseController
     {
-        public UserController(IUserUnitOfWork unitOfWork)
+        private IWorkoutRepository _workoutRepository;
+
+        public UserController(IUserUnitOfWork unitOfWork, IWorkoutRepository workoutRepository)
             : base(unitOfWork)
         {
-
+            _workoutRepository = workoutRepository;
         }
 
         [HttpGet]
@@ -31,6 +37,45 @@ namespace Muscle.Controllers.UserControllers
         {
             var res = await _userUnitOfWork.UserRepository.GetByIdAsync(id);
             return Ok(res);
+        }
+
+        [HttpGet]
+        [Route("GetUsersWorkouts", Name = "GetUsersWorkouts")]
+        public async Task<IActionResult> GetUsersWorkouts(int userId)
+        {
+            var user = await _userUnitOfWork.UserRepository.GetByIdAsync(userId);
+            var userRole = await _userUnitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
+
+            IEnumerable<Workout> usersWorkouts = null;
+            if(userRole.Name == "User")
+            {
+                var usersSubscriptions = await _userUnitOfWork.UserRepository.GetSubscriptions(userId);
+                var subscriptionsIds = usersSubscriptions.Select(x => x.SubscriptionId).ToList();
+
+                usersWorkouts = await _workoutRepository.GetWorkoutsBySubscriptionsIds(subscriptionsIds);
+            }
+            else if(userRole.Name == "Coach")
+                usersWorkouts = await _workoutRepository.GetByCoachId(userId);
+            else if(userRole.Name == "Admin")
+                usersWorkouts = await _workoutRepository.Get();
+
+            return Ok(usersWorkouts);
+        }
+
+        [HttpGet]
+        [Route("GetUsersSubscriptions", Name = "GetUserSubscriptions")]
+        public async Task<IActionResult> GetUsersSubscriptions(int userId)
+        {
+            var res = await _userUnitOfWork.UserRepository.GetSubscriptions(userId);
+            return Ok(res);
+        }
+
+        [HttpPost]
+        [Route("LogIn", Name = "LigIn")]
+        public async Task<IActionResult> LogIn([FromBody]LogInDto logInDto)
+        {
+            var user = await _userUnitOfWork.UserRepository.LogIn(logInDto.Name, logInDto.Password);
+            return Ok(user);
         }
 
         [HttpPost]

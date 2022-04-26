@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.ModelBuilder;
 using Muscle.Entities.DbSet.DbSetForUserDb;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,12 @@ namespace Muscle.DataService.Data
 {
     public class UserDbContext : DbContext
     {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SubscriptionUser>()
+                .HasKey(x => new { x.SubscriptionId, x.UserId });
+        }
+
         public virtual DbSet<Coach> Coaches { get; set; }
         public virtual DbSet<Document> Documents { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -22,5 +29,7 @@ namespace Muscle.DataService.Data
         {
 
         }
+
+        
     }
 }

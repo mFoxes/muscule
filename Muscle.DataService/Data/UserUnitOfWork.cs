@@ -1,4 +1,5 @@
 ﻿using Muscle.DataService.IConfiguration;
+using Muscle.DataService.IRepository.IRepositoryUserDbContext;
 using Muscle.DataService.IRepository.Repository.UserRepository;
 using Muscle.Entities.DbSet.DbSetForUserDb;
 using System;
@@ -12,74 +13,81 @@ namespace Muscle.DataService.Data
     public class UserUnitOfWork : IDisposable, IUserUnitOfWork
     {
         private readonly UserDbContext _context;
-        private GenericRepository<Coach> coachRepository;
-        private GenericRepository<Document> documentRepository;
-        private GenericRepository<Role> roleRepository;
-        private GenericRepository<Subscription> subscriptionRepository;
-        private GenericRepository<SubscriptionUser> subscriptionUserRepository;
-        private GenericRepository<User> userRepository;
+        //private GenericRepository<Coach> coachRepository;
+        //private GenericRepository<Document> documentRepository;
+        //private GenericRepository<Role> roleRepository;
+        //private GenericRepository<Subscription> subscriptionRepository;
+        //private GenericRepository<SubscriptionUser> subscriptionUserRepository;
+        //private GenericRepository<User> userRepository;
+
+        private ICoachRepository coachRepository;
+        private IDocumentRepository documentRepository;
+        private IRoleRepository roleRepository;
+        private ISubscriptionRepository subscriptionRepository;
+        private ISubscriptionUserRepository subscriptionUserRepository;
+        private IUserRepository userRepository;
 
         public UserUnitOfWork(UserDbContext context)
         {
             _context = context;
         }
 
-        public GenericRepository<Coach> CoachRepository
+        public ICoachRepository CoachRepository
         {
             get
             {
                 if(coachRepository == null)
-                    coachRepository = new GenericRepository<Coach>(_context);
+                    coachRepository = new CoachRepository(_context);
                 return coachRepository;
             }
         }
 
-        public GenericRepository<Document> DocumentRepository
+        public IDocumentRepository DocumentRepository
         {
             get
             {
                 if(documentRepository == null)
-                    documentRepository = new GenericRepository<Document>(_context);
+                    documentRepository = new DocumentRepository(_context);
                 return documentRepository;
             }
         }
 
-        public GenericRepository<Role> RoleRepository
+        public IRoleRepository RoleRepository
         {
             get
             {
                 if(roleRepository == null)
-                    roleRepository = new GenericRepository<Role>(_context);
+                    roleRepository = new RoleRepository(_context);
                 return roleRepository;
             }
         }
 
-        public GenericRepository<Subscription> SubscriptionRepository
+        public ISubscriptionRepository SubscriptionRepository
         {
             get
             {
                 if(subscriptionRepository == null)
-                    subscriptionRepository = new GenericRepository<Subscription>(_context);
+                    subscriptionRepository = new SubscriptionRepository(_context);
                 return subscriptionRepository;
             }
         }
 
-        public GenericRepository<SubscriptionUser> SubscriptionUserRepository
+        public ISubscriptionUserRepository SubscriptionUserRepository
         {
             get
             {
                 if (subscriptionRepository == null)
-                    subscriptionUserRepository = new GenericRepository<SubscriptionUser>(_context);
+                    subscriptionUserRepository = new SubscriptionUserRepository(_context);
                 return subscriptionUserRepository;
             }
         }
 
-        public GenericRepository<User> UserRepository
+        public IUserRepository UserRepository
         {
             get
             {
                 if(userRepository == null)
-                    userRepository = new GenericRepository<User>(_context);
+                    userRepository = new UserRepository(_context);
                 return userRepository;
             }
         }

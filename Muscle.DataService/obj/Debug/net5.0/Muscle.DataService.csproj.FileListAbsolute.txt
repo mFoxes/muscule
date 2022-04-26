@@ -2,7 +2,6 @@ D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\bin\Debug\net5.0\
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\bin\Debug\net5.0\Muscle.DataService.runtimeconfig.json
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\bin\Debug\net5.0\Muscle.DataService.runtimeconfig.dev.json
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\bin\Debug\net5.0\Muscle.DataService.dll
-D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\bin\Debug\net5.0\ref\Muscle.DataService.dll
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\bin\Debug\net5.0\Muscle.DataService.pdb
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\bin\Debug\net5.0\Muscle.Entities.dll
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\bin\Debug\net5.0\Muscle.Entities.pdb
@@ -16,3 +15,4 @@ D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\obj\Debug\net5.0\
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\obj\Debug\net5.0\ref\Muscle.DataService.dll
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\obj\Debug\net5.0\Muscle.DataService.pdb
 D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\obj\Debug\net5.0\Muscle.DataService.genruntimeconfig.cache
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.DataService\obj\Debug\net5.0\refint\Muscle.DataService.dll
