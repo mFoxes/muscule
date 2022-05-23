@@ -18,13 +18,31 @@ const UserEquipmentPage = () => {
             console.log(data);
         })
     }, [])
-    
+
 
     return (
         <div className='user-equipment__body'>
-        111
-            <ul>
-            </ul>
+            <ol>
+                {equipment.map((build) => (
+                    <li>
+                        Здание №{build.id} - {build.name}
+                        <ol>
+                            {build?.halls.map((hall) => (
+                                <li>
+                                    Зал №{hall.id} - {hall.name}
+                                    <ol>
+                                        {hall.equipmentHalls?.map((equip) => (
+                                            <li>
+                                                Оборудование №{equip.equipmentId} - {equip.equipment?.name} {equip.quantity}шт.
+                                            </li>
+                                        ))}
+                                    </ol>
+                                </li>
+                            ))}
+                        </ol>
+                    </li>
+                ))}
+            </ol>
         </div>
     )
 }
