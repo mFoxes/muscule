@@ -18,6 +18,7 @@ const WardsModal: FC = () => {
     const [wards, setWards] = useState<ISubscriptionToUser[]>([])
 
     useEffect(() => {
+        
         UserService.getWards(store.wardsSubscribeId).then((data) => {
             setWards(data.data)
             console.log(data);

@@ -38,7 +38,7 @@ export default class UserService {
     }
 
     static async getWards(subscriptionId: number): Promise<AxiosResponse<ISubscriptionToUser[]>> {
-        return $api.post<ISubscriptionToUser[]>('/Subscription/GetSubscriptions\'s users?subscriptionId=' + subscriptionId)
+        return $api.get<ISubscriptionToUser[]>('/Subscription/GetSubscriptions\'s users?id=' + subscriptionId)
     }
 
     static async getAllEquipment(): Promise<AxiosResponse<IBuilding[]>> {
