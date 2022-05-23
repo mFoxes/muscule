@@ -36,10 +36,27 @@ const UserSubscriptionPage = () => {
     }, [nameValue/*, directionValue*/])
 
     useEffect(() => {
-        UserService.getUserSubscription(store.User.id).then((data) => {
-            setSubscriptionData(data.data)
-            setFilteredData(data.data)
-        })
+        if (store.User.id === 3) {
+            UserService.getAllSubscription().then((data) => {
+                data.data.forEach((item) => {
+                    let temp: ISubscriptionToUser = {
+                        subscriptionId: item.id,
+                        subscription: item,
+                        userId: store.User.id,
+                        user: store.User,
+                        visitCount: 0
+                    }
+
+                    setSubscriptionData(oldArray => [...oldArray, temp])
+                    setFilteredData(oldArray => [...oldArray, temp])
+                })
+            })
+        } else {
+            UserService.getUserSubscription(store.User.id).then((data) => {
+                setSubscriptionData(data.data)
+                setFilteredData(data.data)
+            })
+        }
     }, [])
 
     return (
@@ -63,7 +80,7 @@ const UserSubscriptionPage = () => {
             <div className="user-subscription__data">
                 {filteredData.map((data) => {
                     return data.subscription?.id && <LargeCard key={data.subscription?.id + data.subscription?.name} type="user" user_data={data} />
-            })}
+                })}
             </div>
             <SubscriptionModal />
             <WardsModal />

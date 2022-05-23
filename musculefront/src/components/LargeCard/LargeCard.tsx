@@ -13,6 +13,7 @@ const LargeCard: FC<{ all_data?: ISubscription, user_data?: ISubscriptionToUser,
     const BuySubscription = () => {
         if (props.all_data?.id != undefined) {
             const temp = UserService.buySubscription(props.all_data?.id, store.User.id)
+            alert("вы подписались!")
             console.log(temp);
         }
 
