@@ -18,7 +18,7 @@ const WardsModal: FC = () => {
     const [wards, setWards] = useState<ISubscriptionToUser[]>([])
 
     useEffect(() => {
-        
+
         UserService.getWards(store.wardsSubscribeId).then((data) => {
             setWards(data.data)
             console.log(data);
@@ -59,7 +59,9 @@ const WardsModal: FC = () => {
                                     {item.user?.name}
                                 </div>
                                 <div className={`${styles.table__td} ${styles.table__dob}`}>
-                                    {item.user?.dateOfBirth.getDate()}/{item.user?.dateOfBirth.getMonth()}/{item.user?.dateOfBirth.getFullYear()}
+                                    {/* TODO: Доделать!!! */}
+                                    {/* {item.user?.dateOfBirth.getDate()}/{item.user?.dateOfBirth.getMonth()}/{item.user?.dateOfBirth.getFullYear()} */}
+                                    {item.user?.dateOfBirth}
                                 </div>
                                 <div className={`${styles.table__td} ${styles.table__phone}`}>
                                     {item.user?.phone}

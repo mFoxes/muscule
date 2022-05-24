@@ -10,8 +10,11 @@ export interface IWorkout {
     direction?: IDirection,
     hallId?: number,
     hall?: IHall,
-    startTime: Date,
-    endTime: Date,
+    // TODO: Найти способ и исправить на new Date()
+    // startTime: Date,
+    // endTime: Date,
+    startTime: string,
+    endTime: string,
     coachId?: number,
     coach?: IUser,
     subscriptionId?: number,

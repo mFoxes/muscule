@@ -42,7 +42,7 @@ const LargeCard: FC<{ all_data?: ISubscription, user_data?: ISubscriptionToUser,
                     </div>
                     {store.User.role?.id && store.User.role?.id === 1
                         ? <div className="large-card__bottom">
-                            Осталось занятий: {props.user_data.visitCount}
+                            Кол-во посещённых: {props.user_data.visitCount}
                         </div>
                         : <MyButton onClick={() => {
                             store.setActiveWardsModal(true)

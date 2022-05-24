@@ -6,7 +6,9 @@ export interface IUser {
     name: string,
     password?: string,
 
-    dateOfBirth: Date,
+    // TODO: Найти способ и исправить на new Date()
+    // dateOfBirth: Date,
+    dateOfBirth: string,
     phone: string,
 
     roleId?: number,

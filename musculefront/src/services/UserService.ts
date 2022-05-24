@@ -22,7 +22,7 @@ export default class UserService {
     }
 
     static async getUserWorkout(userId: number): Promise<AxiosResponse<IWorkout[]>> {
-        return $api.get<IWorkout[]>('/User​/GetUsersWorkouts?userId=' + userId)
+        return $api.get<IWorkout[]>('/User/GetUsersWorkouts?userId=' + userId)
     }
 
     static async addWorkout(name: string, coachId: number, directionId: number, hallId: number, startTime: Date, endTime: Date): Promise<AxiosResponse<any>> {

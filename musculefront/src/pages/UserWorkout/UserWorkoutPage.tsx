@@ -35,18 +35,6 @@ const UserWorkoutPage = () => {
     })
 
     useEffect(() => {
-        setFilteredData(workoutData.filter(item => {
-            if (startDate != null && endDate != null) {
-                let temp_start = item.startTime.getFullYear() >= startDate.getFullYear() && item.startTime.getMonth() >= startDate.getMonth() + 1 && item.startTime.getDate() >= startDate.getDate()
-                let temp_end = item.startTime.getFullYear() <= endDate.getFullYear() && item.startTime.getMonth() <= endDate.getMonth() + 1 && item.startTime.getDate() <= endDate.getDate()
-                return item.name.toLowerCase().includes(nameValue.toLowerCase()) && item.direction?.name.toLowerCase().includes(directionValue.toLowerCase()) && temp_start && temp_end
-            }
-            return item.name.toLowerCase().includes(nameValue.toLowerCase()) && item.direction?.name.toLowerCase().includes(directionValue.toLowerCase())
-        }))
-
-    }, [nameValue, directionValue, startDate, endDate])
-
-    useEffect(() => {
         UserService.getUserWorkout(store.User.id).then((data) => {
             setWorkoutData(data.data)
             setFilteredData(data.data)
@@ -56,6 +44,19 @@ const UserWorkoutPage = () => {
             setDirection(data.data)
         })
     }, [])
+
+    useEffect(() => {
+        // Исправить хрень с Date() и допилить
+        // setFilteredData(workoutData.filter(item => {
+        //     if (startDate != null && endDate != null) {
+        //         let temp_start = item.startTime.getFullYear() >= startDate.getFullYear() && item.startTime.getMonth() >= startDate.getMonth() + 1 && item.startTime.getDate() >= startDate.getDate()
+        //         let temp_end = item.startTime.getFullYear() <= endDate.getFullYear() && item.startTime.getMonth() <= endDate.getMonth() + 1 && item.startTime.getDate() <= endDate.getDate()
+        //         return item.name.toLowerCase().includes(nameValue.toLowerCase()) && item.direction?.name.toLowerCase().includes(directionValue.toLowerCase()) && temp_start && temp_end
+        //     }
+        //     return item.name.toLowerCase().includes(nameValue.toLowerCase()) && item.direction?.name.toLowerCase().includes(directionValue.toLowerCase())
+        // }))
+
+    }, [nameValue, directionValue, startDate, endDate])
 
     return (
         <>

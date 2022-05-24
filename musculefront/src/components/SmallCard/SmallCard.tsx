@@ -11,9 +11,9 @@ export const SmallCard: FC<{ coach_data?: IUser, workout_data?: IWorkout, type: 
                     <div className="small-card__title">
                         {props.coach_data.name}
                     </div>
-                    <div className="small-card__direction">
-                        <div>Направление: </div>
-                        <div>{props.coach_data.name}</div>
+                    <div className="small-card__description">
+                        <div>Описание: </div>
+                        <div>{props.coach_data.description}</div>
                     </div>
                 </div>
                 : props.workout_data && 
@@ -30,8 +30,8 @@ export const SmallCard: FC<{ coach_data?: IUser, workout_data?: IWorkout, type: 
                         <div>{props.workout_data.coach?.name}</div>
                     </div>
                     <div className="small-card__data">
-                        <div>{props.workout_data.startTime.getDate() < 10 ? "0" : ""}{props.workout_data.startTime.getDate()}/{props.workout_data.startTime.getMonth() < 10 ? "0" : ""}{props.workout_data.startTime.getMonth()}/{props.workout_data.startTime.getFullYear()}</div>
-                        <div>{props.workout_data.startTime.getHours()}:{props.workout_data.startTime.getMinutes() < 10 ? "0" : ""}{props.workout_data.startTime.getMinutes()}-{props.workout_data.endTime.getHours()}:{props.workout_data.endTime.getMinutes() < 10 ? "0" : ""}{props.workout_data.endTime.getMinutes()}</div>
+                        {/* <div>{props.workout_data.startTime.getDate() < 10 ? "0" : ""}{props.workout_data.startTime.getDate()}/{props.workout_data.startTime.getMonth() < 10 ? "0" : ""}{props.workout_data.startTime.getMonth()}/{props.workout_data.startTime.getFullYear()}</div> */}
+                        {/* <div>{props.workout_data.startTime.getHours()}:{props.workout_data.startTime.getMinutes() < 10 ? "0" : ""}{props.workout_data.startTime.getMinutes()}-{props.workout_data.endTime.getHours()}:{props.workout_data.endTime.getMinutes() < 10 ? "0" : ""}{props.workout_data.endTime.getMinutes()}</div> */}
                     </div>
                 </div>}
         </>

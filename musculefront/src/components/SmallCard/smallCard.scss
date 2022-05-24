@@ -21,9 +21,15 @@
         font-size: 24px;
     }
 
-    // .small-card__direction
-    &__direction {
+    // .small-card__discription
+    &__discription {
+        max-height: 50%;
         font-size: 18px;
+        &:nth-child(2) {
+            font-size: 12px;
+            overflow: auto;
+            max-height: 50%;
+        }
     }
     
 
