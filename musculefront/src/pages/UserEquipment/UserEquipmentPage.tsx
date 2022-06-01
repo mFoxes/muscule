@@ -15,10 +15,8 @@ const UserEquipmentPage = () => {
     useEffect(() => {
         UserService.getAllEquipment().then((data) => {
             setEquipment(data.data)
-            console.log(data);
         })
     }, [])
-
 
     return (
         <div className='user-equipment__body'>

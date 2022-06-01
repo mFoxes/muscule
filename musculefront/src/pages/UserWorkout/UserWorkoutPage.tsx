@@ -12,6 +12,7 @@ import { Context } from '../..'
 import WorkoutModal from '../../components/Modals/Workout/WorkoutModal'
 import UserService from '../../services/UserService'
 import { IDirection } from '../../models/interface/IDirection'
+import { IBuilding } from '../../models/interface/IBuilding'
 
 const UserWorkoutPage = () => {
     const { store } = useContext(Context)
@@ -34,6 +35,33 @@ const UserWorkoutPage = () => {
         return item.name.toLowerCase().includes(directionValue.toLowerCase())
     })
 
+    //
+    const [equipment, setEquipment] = useState<IBuilding[]>([])
+
+    useEffect(() => {
+        UserService.getAllEquipment().then((data) => {
+            setEquipment(data.data)
+        })
+    }, [])
+    //
+
+    useEffect(() => {
+        setFilteredData(workoutData.filter(item => {
+
+            let temp_name = item.name != undefined ? item.name.toLowerCase().includes(nameValue.toLowerCase()) : true
+            let temp_dirname = item.direction?.name != undefined ? item.direction?.name.toLowerCase().includes(directionValue.toLowerCase()) : true
+
+            if (startDate != null && endDate != null) {
+                let startTime = new Date(item.startTime)
+                let endTime = new Date(item.endTime)
+                
+                return temp_name && temp_dirname && startTime >= startDate && endTime <= endDate
+            }
+            return temp_name && temp_dirname
+        }))
+
+    }, [nameValue, directionValue, startDate, endDate])
+
     useEffect(() => {
         UserService.getUserWorkout(store.User.id).then((data) => {
             setWorkoutData(data.data)
@@ -44,19 +72,6 @@ const UserWorkoutPage = () => {
             setDirection(data.data)
         })
     }, [])
-
-    useEffect(() => {
-        // Исправить хрень с Date() и допилить
-        // setFilteredData(workoutData.filter(item => {
-        //     if (startDate != null && endDate != null) {
-        //         let temp_start = item.startTime.getFullYear() >= startDate.getFullYear() && item.startTime.getMonth() >= startDate.getMonth() + 1 && item.startTime.getDate() >= startDate.getDate()
-        //         let temp_end = item.startTime.getFullYear() <= endDate.getFullYear() && item.startTime.getMonth() <= endDate.getMonth() + 1 && item.startTime.getDate() <= endDate.getDate()
-        //         return item.name.toLowerCase().includes(nameValue.toLowerCase()) && item.direction?.name.toLowerCase().includes(directionValue.toLowerCase()) && temp_start && temp_end
-        //     }
-        //     return item.name.toLowerCase().includes(nameValue.toLowerCase()) && item.direction?.name.toLowerCase().includes(directionValue.toLowerCase())
-        // }))
-
-    }, [nameValue, directionValue, startDate, endDate])
 
     return (
         <>
@@ -101,7 +116,7 @@ const UserWorkoutPage = () => {
                         placeholderText="Время"
                     />
                 </div>
-                {store.User.role?.id != undefined && store.User.role?.id > 1 && <MyButton
+                {store.User.role?.id != undefined && store.User.role?.id == 2 && <MyButton
                     onClick={() => {
                         store.setActiveWorkoutModal(true)
                     }}

@@ -21,14 +21,13 @@
         font-size: 24px;
     }
 
-    // .small-card__discription
-    &__discription {
+    // .small-card__description
+    &__description {
         max-height: 50%;
         font-size: 18px;
-        &:nth-child(2) {
-            font-size: 12px;
+        & div+div {
+            font-size: 14px;
             overflow: auto;
-            max-height: 50%;
         }
     }
     

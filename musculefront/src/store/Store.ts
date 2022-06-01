@@ -55,12 +55,12 @@ export default class Store {
 
     async login({ name, password }: IData) {
         try {
-            const response = await AuthService.login(name, password);
+            const response = await AuthService.login( name, password );
             this.setUser(response.data)
             // this.setUser({
-            //     id: 1,
+            //     id: 3,
             //     name: "dsa",
-            //     dateOfBirth: new Date(),
+            //     dateOfBirth: "",
             //     phone: "dsa",
             //     role: {
             //         id: 3,
@@ -68,7 +68,7 @@ export default class Store {
             //         description: "dsa"
             //     }
             // })
-            // console.log(response)
+            console.log(response)
             this.setAuth(true);
             this.setActiveLoginModal(false)
         } catch (e: any) {

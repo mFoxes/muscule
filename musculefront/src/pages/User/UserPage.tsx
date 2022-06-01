@@ -28,7 +28,7 @@ const UserPage = () => {
                 <Route path="/workout" element={<UserWorkoutPage></UserWorkoutPage>} />
                 <Route path="/subscription" element={<UserSubscriptionPage></UserSubscriptionPage>} />
                 <Route path="/data" element={<UserDataPage></UserDataPage>} />
-                {store.User.role?.id == 3 && <Route path="/user/equipment" element={<UserEquipmentPage></UserEquipmentPage>} />}
+                {store.User.role?.id == 3 && <Route path="/equipment" element={<UserEquipmentPage></UserEquipmentPage>} />}
             </Routes>
         </div>
     )

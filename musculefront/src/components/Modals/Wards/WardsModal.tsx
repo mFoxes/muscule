@@ -21,7 +21,7 @@ const WardsModal: FC = () => {
 
         UserService.getWards(store.wardsSubscribeId).then((data) => {
             setWards(data.data)
-            console.log(data);
+            console.log(wards[0] != undefined && typeof wards[0].user?.dateOfBirth);
         })
     }, [store.wardsSubscribeId])
 
@@ -51,7 +51,7 @@ const WardsModal: FC = () => {
                     </div>
                     <div className={styles.table__body}>
                         {wards.map((item) => (
-                            <div className={styles.table__tr}>
+                            <div className={styles.table__tr} key={item.user?.name+item.userId.toString()}>
                                 <div className={`${styles.table__td} ${styles.table__id}`}>
                                     {item.userId}
                                 </div>
@@ -59,9 +59,9 @@ const WardsModal: FC = () => {
                                     {item.user?.name}
                                 </div>
                                 <div className={`${styles.table__td} ${styles.table__dob}`}>
-                                    {/* TODO: Доделать!!! */}
+                                    {item.user?.dateOfBirth && item.user?.dateOfBirth.toString().split('T')[0]}
+                                    {/* TODO: Исправить! */}
                                     {/* {item.user?.dateOfBirth.getDate()}/{item.user?.dateOfBirth.getMonth()}/{item.user?.dateOfBirth.getFullYear()} */}
-                                    {item.user?.dateOfBirth}
                                 </div>
                                 <div className={`${styles.table__td} ${styles.table__phone}`}>
                                     {item.user?.phone}

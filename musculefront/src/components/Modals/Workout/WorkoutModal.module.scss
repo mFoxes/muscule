@@ -58,8 +58,41 @@
 
         cursor: pointer;
     }
+    
+    &__inputlist {
+        position: relative;
+    }
+
+    &__list {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        max-height: 200px;
+        opacity: 0;
+        overflow-y: scroll;
+        background-color: $mainColorBG2;
+        transition: all 0.5s linear;
+
+        li {
+            padding: 10px 0;
+            width: 100%;
+            font-size: 18px;
+
+            cursor: pointer;
+        }
+
+        &._active {
+            height: fit-content;
+            top: 25px;
+            opacity: 1;
+        }
+    }
+
 }
 
 .body__active {
     transform: scale(1);
 }
+

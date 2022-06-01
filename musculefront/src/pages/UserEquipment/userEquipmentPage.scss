@@ -1,0 +1,14 @@
+.user-equipment {
+    // .user-equipment__body
+    &__body {
+        width: 100%;
+        height: 100%;
+
+        ol { 
+            & li {
+                margin-left: 15px;
+            }
+        }
+    }
+    
+}

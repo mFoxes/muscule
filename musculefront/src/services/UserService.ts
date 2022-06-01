@@ -25,8 +25,8 @@ export default class UserService {
         return $api.get<IWorkout[]>('/User/GetUsersWorkouts?userId=' + userId)
     }
 
-    static async addWorkout(name: string, coachId: number, directionId: number, hallId: number, startTime: Date, endTime: Date): Promise<AxiosResponse<any>> {
-        return $api.post<any>('/Workout', { name, coachId, directionId, hallId, startTime, endTime })
+    static async addWorkout(name: string, coachId: number, directionId: number, hallId: number, startTime: Date, endTime: Date, subscriptionId: number): Promise<AxiosResponse<any>> {
+        return $api.post<any>('/Workout', { name, coachId, directionId, hallId, startTime, endTime, subscriptionId })
     }
 
     static async getUserSubscription(userId: number): Promise<AxiosResponse<ISubscriptionToUser[]>> {
