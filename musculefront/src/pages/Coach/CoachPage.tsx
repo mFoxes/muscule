@@ -10,31 +10,44 @@ import "./coachPage.scss";
 
 const CoachPage = () => {
     const [coachData, setCoachData] = useState<IUser[]>([])
-    const [coachWorkoutsCountData, setCoachWorkoutsCountData] = useState<ICoachesWorkouts[]>([])
+    const [active, setActive] = useState<boolean>(false)
 
     useEffect(() => {
-        UserService.getAllCoach().then((data) => {
-            setCoachData(data.data)
+        setActive(false)
+        UserService.getAllCoach().then((data_coach) => {
+            setCoachData(data_coach.data)
+
+            UserService.getCoachesWorkoutsCount().then((data) => {
+            data.data.shift()
+            let temp: IUser[] = []
+            for (let i = 0; i < data.data.length; i++) {
+                console.log(data.data[i].CountOfWorkouts)
+                temp.push({
+                    id: coachData[i].id,
+
+                    name: coachData[i].name,
+
+                    dateOfBirth: coachData[i].dateOfBirth,
+                    phone: coachData[i].phone,
+
+                    roleId: coachData[i].roleId,
+
+                    description: coachData[i].description,
+                    directionId: coachData[i].directionId,
+                    CountOfWorkouts: data.data[i].CountOfWorkouts
+                })
+            }
+            setCoachData(temp)
+            setActive(true)
+        })
         })
 
-        UserService.getCoachesWorkoutsCount().then((data) => {
-            data.data.shift()
-            let temp: IUser[] = [] 
-            if (coachData.length === data.data.length) {
-                for (let i = 0; i < data.data.length; i++) {
-                    if (coachData[i].id == data.data[i].CoachId) {
-                        temp.push(coachData[i])
-                        temp[i].CountOfWorkouts = data.data[i].CountOfWorkouts
-                    }
-                }
-                setCoachData(temp)
-            }
-        })
+        
     }, [])
 
     return (
         <div className='coach-page__container'>
-            {coachData.map((data) => (
+            {active && coachData.map((data) => (
                 <SmallCard key={data.id + data.name} type="coach" coach_data={data} />
             ))}
         </div>
