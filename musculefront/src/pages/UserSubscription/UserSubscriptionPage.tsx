@@ -14,6 +14,7 @@ import SubscriptionModal from '../../components/Modals/Subscription/Subscription
 import WardsModal from '../../components/Modals/Wards/WardsModal'
 import UserService from '../../services/UserService'
 import { ISubscription } from '../../models/interface/ISubscription'
+import { IBuilding } from '../../models/interface/IBuilding'
 
 const UserSubscriptionPage = () => {
     const { store } = useContext(Context)
@@ -27,7 +28,6 @@ const UserSubscriptionPage = () => {
 
     const [filteredData, setFilteredData] = useState<ISubscriptionToUser[]>([])
 
-
     useEffect(() => {
         setFilteredData(subscriprionData.filter(item => {
             return item.subscription?.name.toLowerCase().includes(nameValue.toLowerCase()) /*&& item.direction?.name.toLowerCase().includes(directionValue.toLowerCase())*/
@@ -36,7 +36,7 @@ const UserSubscriptionPage = () => {
     }, [nameValue/*, directionValue*/])
 
     useEffect(() => {
-        if (store.User.id === 3) {
+        if (store.User.role?.id === 3) {
             UserService.getAllSubscription().then((data) => {
                 data.data.forEach((item) => {
                     let temp: ISubscriptionToUser = {

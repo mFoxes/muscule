@@ -15,7 +15,9 @@ const UserDataPage = () => {
             </div>
             <div className="user-data__item">
                 <div className='user-data__title'>Дата рождения</div>
-                <div className='user-data__line'>{store.User.dateOfBirth.getDate()}.{store.User.dateOfBirth.getMonth()}.{store.User.dateOfBirth.getFullYear()}</div>
+                <div className='user-data__line'>{store.User.dateOfBirth.toString().split("T")[0]}</div>
+                {/* TODO: Исправить */}
+                {/* <div className='user-data__line'>{store.User.dateOfBirth.getDate()}.{store.User.dateOfBirth.getMonth()}.{store.User.dateOfBirth.getFullYear()}</div> */}
             </div>
             <div className="user-data__item">
                 <div className='user-data__title'>Телефон</div>

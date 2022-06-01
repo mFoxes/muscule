@@ -12,6 +12,7 @@ import { Context } from '../..'
 import WorkoutModal from '../../components/Modals/Workout/WorkoutModal'
 import UserService from '../../services/UserService'
 import { IDirection } from '../../models/interface/IDirection'
+import { IBuilding } from '../../models/interface/IBuilding'
 
 const UserWorkoutPage = () => {
     const { store } = useContext(Context)
@@ -34,14 +35,32 @@ const UserWorkoutPage = () => {
         return item.name.toLowerCase().includes(directionValue.toLowerCase())
     })
 
+    //
+    const [equipment, setEquipment] = useState<IBuilding[]>([])
+
+    useEffect(() => {
+        UserService.getAllEquipment().then((data) => {
+            setEquipment(data.data)
+        })
+    }, [])
+    //
+
     useEffect(() => {
         setFilteredData(workoutData.filter(item => {
+
+            let temp_name = item.name != undefined ? item.name.toLowerCase().includes(nameValue.toLowerCase()) : true
+            let temp_dirname = item.direction?.name != undefined ? item.direction?.name.toLowerCase().includes(directionValue.toLowerCase()) : true
+
             if (startDate != null && endDate != null) {
-                let temp_start = item.startTime.getFullYear() >= startDate.getFullYear() && item.startTime.getMonth() >= startDate.getMonth() + 1 && item.startTime.getDate() >= startDate.getDate()
-                let temp_end = item.startTime.getFullYear() <= endDate.getFullYear() && item.startTime.getMonth() <= endDate.getMonth() + 1 && item.startTime.getDate() <= endDate.getDate()
-                return item.name.toLowerCase().includes(nameValue.toLowerCase()) && item.direction?.name.toLowerCase().includes(directionValue.toLowerCase()) && temp_start && temp_end
+                let startTime = new Date(item.startTime)
+                let endTime = new Date(item.endTime)
+
+                // let temp_start = (startTime.getFullYear() >= startDate.getFullYear()) && (startTime.getMonth() >= startDate.getMonth()) && (startTime.getDate() >= startDate.getDate())
+                // let temp_end = startTime.getFullYear() <= endDate.getFullYear() && startTime.getMonth() <= endDate.getMonth() && startTime.getDate() <= endDate.getDate()
+
+                return temp_name && temp_dirname && startTime >= startDate && endTime <= endDate
             }
-            return item.name.toLowerCase().includes(nameValue.toLowerCase()) && item.direction?.name.toLowerCase().includes(directionValue.toLowerCase())
+            return temp_name && temp_dirname
         }))
 
     }, [nameValue, directionValue, startDate, endDate])
