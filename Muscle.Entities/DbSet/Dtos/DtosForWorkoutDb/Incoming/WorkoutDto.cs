@@ -11,6 +11,7 @@ namespace Muscle.Entities.DbSet.Dtos.DtosForWorkoutDb.Incoming
         public string Name { get; set; }
         public int CoachId { get; set; }
         public int DirectionId { get; set; }
+        public int SubscriptionId { get; set; }
         public int HallId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

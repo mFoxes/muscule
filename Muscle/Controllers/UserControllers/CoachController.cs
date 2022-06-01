@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Muscle.DataService.IConfiguration;
+using Muscle.DataService.IRepository.IRepositoryWorkoutDb;
 using Muscle.Entities.DbSet.DbSetForUserDb;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,11 @@ namespace Muscle.Controllers.UserControllers
 {
     public class CoachController : BaseController
     {
-        public CoachController(IUserUnitOfWork unitOfWork)
+        private IWorkoutRepository _workoutRepository;
+        public CoachController(IUserUnitOfWork unitOfWork, IWorkoutRepository workoutRepository)
             : base(unitOfWork)
         {
-
+            _workoutRepository = workoutRepository;
         }
 
         [HttpGet]
@@ -30,6 +32,22 @@ namespace Muscle.Controllers.UserControllers
         public async Task<IActionResult> GetById(int id)
         {
             var res = await _userUnitOfWork.CoachRepository.GetByIdAsync(id);
+            return Ok(res);
+        }
+
+        [HttpGet]
+        [Route("GetCoachesWorkoutsCount", Name = "GetCoachesWorkoutsCount")]
+        public async Task<IActionResult> GetCoachesWorkoutsCount()
+        {
+            var coaches = await _userUnitOfWork.CoachRepository.GetAllAsync();
+            
+            var res = new[] {  new { CoachId = -1, CountOfWorkouts = 0 }  }.ToList();
+            
+            foreach (var item in coaches)
+            {
+                var workouts = await _workoutRepository.GetCurrentByCoachId(item.Id);
+                res.Add(new { CoachId = item.Id, CountOfWorkouts = workouts.Count() });
+            }
             return Ok(res);
         }
 

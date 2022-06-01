@@ -6,6 +6,7 @@ using Muscle.DataService.IRepository.IRepositoryWorkoutDb;
 using Muscle.Entities.DbSet.DbSetForUserDb;
 using Muscle.Entities.DbSet.DbSetForWorkoutDb;
 using Muscle.Entities.DbSet.Dtos.DtosForUserDb.Incoming;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,6 +58,41 @@ namespace Muscle.Controllers.UserControllers
             else if(userRole.Name == "Coach")
                 usersWorkouts = await _workoutRepository.GetByCoachId(userId);
             else if(userRole.Name == "Admin")
+                usersWorkouts = await _workoutRepository.Get();
+
+            return Ok(usersWorkouts);
+        }
+
+        [HttpGet]
+        [Route("GetNumberOfUserWorkoutsPerWeek", Name = "GetNumberOfUserWorkoutsPerWeek")]
+        public async Task<IActionResult> GetNumberOfUserWorkoutsPerWeek(int userId)
+        {
+            var user = await _userUnitOfWork.UserRepository.GetByIdAsync(userId);
+            var userRole = await _userUnitOfWork.RoleRepository.GetByIdAsync(user.RoleId);
+
+            IEnumerable<Workout> usersWorkouts = null;
+            if (userRole.Name == "User")
+            {
+                var usersSubscriptions = await _userUnitOfWork.UserRepository.GetSubscriptions(userId);
+                var subscriptionsIds = usersSubscriptions.Select(x => x.SubscriptionId).ToList();
+
+                var temp = await _workoutRepository.GetWorkoutsBySubscriptionsIds(subscriptionsIds);
+                DateTime startOfCurrentWeek = DateTime.Now;
+                DateTime endOfCurrentWeek = DateTime.Now;
+                while (startOfCurrentWeek.DayOfWeek != DayOfWeek.Monday)
+                {
+                    startOfCurrentWeek = startOfCurrentWeek.AddDays(-1);
+                }
+                while (endOfCurrentWeek.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    endOfCurrentWeek = endOfCurrentWeek.AddDays(1);
+                }
+
+                usersWorkouts = temp.Where(x => x.StartTime >= startOfCurrentWeek && x.EndTime <= endOfCurrentWeek).ToList();
+            }
+            else if (userRole.Name == "Coach")
+                usersWorkouts = await _workoutRepository.GetByCoachId(userId);
+            else if (userRole.Name == "Admin")
                 usersWorkouts = await _workoutRepository.Get();
 
             return Ok(usersWorkouts);

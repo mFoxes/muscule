@@ -16,6 +16,7 @@ namespace Muscle.DataService.IRepository.IRepositoryWorkoutDb
         Task<Workout> Get(string workoutId);
         Task<IEnumerable<Workout>> Get();
         Task<IEnumerable<Workout>> GetWorkoutsBySubscriptionsIds(IEnumerable<int> subscriptionsIds);
+        Task<IEnumerable<Workout>> GetCurrentByCoachId(int coachId);
         Task<IEnumerable<Workout>> GetByCoachId(int coachId);
         // Update
         Task<bool> Update(string workoutId, Workout workout);
