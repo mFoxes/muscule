@@ -55,7 +55,7 @@ namespace Muscle.Controllers.UserControllers
             if (!res)
                 return BadRequest("Error while adding");
             await _userUnitOfWork.Save();
-            return Ok(res); //TODO Поменяй на CreatedAtRoute + добавь DTO классы
+            return Ok(res); //TODO поменять на modelstate
         }
 
         [HttpPost]

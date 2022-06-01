@@ -21,10 +21,12 @@ namespace Muscle.DataService.IRepository.Repository.UserRepository
         public async Task<IEnumerable<SubscriptionUser>> GetUsers(int subscriptionId)
         {
             var res = await _dbSet.Include(x => x.SubscriptionsUser)
-                .ThenInclude(x => x.User)
-                .FirstOrDefaultAsync(x => x.Id == subscriptionId);
-
-            return res.SubscriptionsUser;
+            .ThenInclude(x => x.User)
+            .FirstOrDefaultAsync(x => x.Id == subscriptionId);
+            if(res != null)
+                return res.SubscriptionsUser;
+           
+            return new List<SubscriptionUser>();
         }
     }
 }
