@@ -17,7 +17,10 @@ export interface IUser {
     description?: string,
     directionId?: number
 
-    //TODO Разобраться с интерфейсами
+    //TODO: Разобраться с интерфейсами
     documents?: any,
     subscriptionUsers?: any,
+    
+    //TODO: Костыли
+    CountOfWorkouts?: number 
 }

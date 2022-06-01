@@ -18,14 +18,24 @@ const CoachPage = () => {
         })
 
         UserService.getCoachesWorkoutsCount().then((data) => {
-            setCoachWorkoutsCountData(data.data)
+            data.data.shift()
+            let temp: IUser[] = [] 
+            if (coachData.length === data.data.length) {
+                for (let i = 0; i < data.data.length; i++) {
+                    if (coachData[i].id == data.data[i].CoachId) {
+                        temp.push(coachData[i])
+                        temp[i].CountOfWorkouts = data.data[i].CountOfWorkouts
+                    }
+                }
+                setCoachData(temp)
+            }
         })
     }, [])
 
     return (
         <div className='coach-page__container'>
             {coachData.map((data) => (
-                <SmallCard key={data.id + data.name} type="coach" coach_data={data} workout_count={coachWorkoutsCountData.filter(item => item.CoachId == data.id)[0].CountOfWorkouts}/>
+                <SmallCard key={data.id + data.name} type="coach" coach_data={data} />
             ))}
         </div>
     )
