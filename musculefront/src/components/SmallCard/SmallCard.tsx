@@ -1,9 +1,13 @@
-import React, { FC, ReactElement, useState } from 'react'
+import React, { FC, ReactElement, useContext, useState } from 'react'
 import "./smallCard.scss"
 import { IUser } from '../../models/interface/IUser'
 import { IWorkout } from '../../models/interface/IWorkout'
+import { Context } from '../..'
+import { ICoachesWorkouts } from '../../models/interface/ICoachesWorkouts'
 
-export const SmallCard: FC<{ coach_data?: IUser, workout_data?: IWorkout, type: string }> = ({ ...props }) => {
+export const SmallCard: FC<{ coach_data?: IUser, workout_data?: IWorkout, type: string, workout_count?: number }> = ({ ...props }) => {
+    const { store } = useContext(Context);
+
     return (
         <>
             {props.type == "coach" && props.coach_data
@@ -15,6 +19,9 @@ export const SmallCard: FC<{ coach_data?: IUser, workout_data?: IWorkout, type: 
                         <div>Описание: </div>
                         <div>{props.coach_data.description}</div>
                     </div>
+                    {store.User.id === 3 && <div className="small-card__">
+                        <div>Кол-во занятий: {props.workout_count}</div>
+                    </div>}
                 </div>
                 : props.workout_data && 
                 <div className='small-card'>

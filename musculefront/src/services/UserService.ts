@@ -1,6 +1,7 @@
 import { Axios, AxiosResponse } from "axios";
 import $api from "../http";
 import { IBuilding } from "../models/interface/IBuilding";
+import { ICoachesWorkouts } from "../models/interface/ICoachesWorkouts";
 import { IDirection } from "../models/interface/IDirection";
 import { IEquipmentToHall } from "../models/interface/IEquipmentToHall";
 import { ISubscription } from "../models/interface/ISubscription";
@@ -47,5 +48,13 @@ export default class UserService {
 
     static async getAllDirection(): Promise<AxiosResponse<IDirection[]>> {
         return $api.get<IDirection[]>('/Direction/GetAllDirections')
+    }
+
+    static async getNumberOfUserWorkoutsPerWeek(userId: number): Promise<AxiosResponse<IWorkout[]>> {
+        return $api.get<IWorkout[]>('/User/GetNumberOfUserWorkoutsPerWeek?userId=' + userId)
+    }
+
+    static async getCoachesWorkoutsCount(): Promise<AxiosResponse<ICoachesWorkouts[]>> {
+        return $api.get<ICoachesWorkouts[]>('/Coach/GetCoachesWorkoutsCount')
     }
 }

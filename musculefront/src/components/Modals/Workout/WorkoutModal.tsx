@@ -106,7 +106,7 @@ const WorkoutModal: FC = () => {
         })
         // subscription
         subscription.forEach((item) => {
-            if (item.name == subscriptionValue) {
+            if (item.name == subscriptionValue) {A
                 data.subscriptionId = item.id
             }
         })

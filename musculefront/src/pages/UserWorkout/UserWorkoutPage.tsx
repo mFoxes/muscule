@@ -17,7 +17,10 @@ import { IBuilding } from '../../models/interface/IBuilding'
 const UserWorkoutPage = () => {
     const { store } = useContext(Context)
 
+    const [weekWorkoutData, setWeekWorkoutData] = useState<IWorkout[]>([])
+    const [tempWorkoutData, setTempWorkoutData] = useState<IWorkout[]>([])
     const [workoutData, setWorkoutData] = useState<IWorkout[]>([])
+    const [filteredData, setFilteredData] = useState<IWorkout[]>([])
 
     const [nameValue, setNameValue] = useState<string>('')
 
@@ -27,23 +30,15 @@ const UserWorkoutPage = () => {
     const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
     const [startDate, endDate] = dateRange;
 
-    const [filteredData, setFilteredData] = useState<IWorkout[]>([])
-
     const [direction, setDirection] = useState<IDirection[]>([])
 
     const direction_filderedData = direction.filter(item => {
         return item.name.toLowerCase().includes(directionValue.toLowerCase())
     })
+    
+    const [weekActive, setWeekActive] = useState<boolean>(false)
 
-    //
     const [equipment, setEquipment] = useState<IBuilding[]>([])
-
-    useEffect(() => {
-        UserService.getAllEquipment().then((data) => {
-            setEquipment(data.data)
-        })
-    }, [])
-    //
 
     useEffect(() => {
         setFilteredData(workoutData.filter(item => {
@@ -54,7 +49,7 @@ const UserWorkoutPage = () => {
             if (startDate != null && endDate != null) {
                 let startTime = new Date(item.startTime)
                 let endTime = new Date(item.endTime)
-                
+
                 return temp_name && temp_dirname && startTime >= startDate && endTime <= endDate
             }
             return temp_name && temp_dirname
@@ -66,12 +61,31 @@ const UserWorkoutPage = () => {
         UserService.getUserWorkout(store.User.id).then((data) => {
             setWorkoutData(data.data)
             setFilteredData(data.data)
+            setTempWorkoutData(data.data)
         })
 
         UserService.getAllDirection().then((data) => {
             setDirection(data.data)
         })
+
+        UserService.getAllEquipment().then((data) => {
+            setEquipment(data.data)
+        })
+
+        UserService.getNumberOfUserWorkoutsPerWeek(store.User.id).then((data) => {
+            setWeekWorkoutData(data.data)
+        })
     }, [])
+
+    useEffect(() => {
+        if (weekActive) {
+            setWorkoutData(weekWorkoutData)
+            setFilteredData(weekWorkoutData)
+        } else {
+            setWorkoutData(tempWorkoutData)
+            setFilteredData(tempWorkoutData)
+        }
+    }, [weekActive])
 
     return (
         <>
@@ -116,13 +130,23 @@ const UserWorkoutPage = () => {
                         placeholderText="Время"
                     />
                 </div>
-                {store.User.role?.id != undefined && store.User.role?.id == 2 && <MyButton
-                    onClick={() => {
-                        store.setActiveWorkoutModal(true)
-                    }}
-                >
-                    Добавить тренировку
-                </MyButton>}
+                {store.User.role?.id != undefined && store.User.role?.id == 1
+                    ? <MyButton
+                        onClick={() => {
+                            setWeekActive(!weekActive);
+                        }}
+                    >
+                        Показать тренировки в неделю
+                    </MyButton>
+                    : <MyButton
+                        onClick={() => {
+                            store.setActiveWorkoutModal(true)
+                        }}
+                    >
+                        Добавить тренировку
+                    </MyButton>
+                }
+
             </div>
             <div className="user-workout__data">
                 {filteredData.map((data) => (
