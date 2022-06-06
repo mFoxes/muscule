@@ -1,0 +1,49 @@
+@import "../../styles/variables.scss";
+
+.small-card {
+    width: 265px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 25px;
+
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+
+    background: $mainColorBG1;
+
+    // .small-card__title
+    &__title {
+        font-size: 24px;
+    }
+
+    // .small-card__description
+    &__description {
+        max-height: 50%;
+        font-size: 18px;
+        & div+div {
+            font-size: 14px;
+            overflow: auto;
+        }
+    }
+    
+
+    // .small-card__hall
+    &__hall {
+        font-size: 18px;
+    }
+
+    // .small-card__coach
+    &__coach {
+        font-size: 18px;
+    }
+
+    // .small-card__data
+    &__data {
+        font-size: 18px;
+    }
+}

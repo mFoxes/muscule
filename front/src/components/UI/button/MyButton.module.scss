@@ -1,0 +1,10 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/fonts.scss";
+
+.MyBtn {
+    background: $mainColorBlack;
+
+    padding: 13px 20px;
+
+    @include Button;
+}

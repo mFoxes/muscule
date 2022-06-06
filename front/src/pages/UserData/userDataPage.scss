@@ -1,0 +1,44 @@
+.user-data {
+    // .user-data__body
+
+    &__body {
+        width: 100%;
+        height: 100%;
+        padding: 50px 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        font-family: "Montserrat", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 130%;
+        /* identical to box height, or 21px */
+
+        letter-spacing: 0.05em;
+    }
+
+    // .user-data__item
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 320px;
+        width: fit-content;
+
+        border-bottom: 1px solid black;
+    }
+
+    // .user-data__title
+
+    &__title {
+    }
+
+    // .user-data__line
+
+    &__line {
+    }
+}

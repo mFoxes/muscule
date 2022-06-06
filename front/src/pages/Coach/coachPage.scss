@@ -1,0 +1,13 @@
+.coach-page {
+
+    // .coach-page__container
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+
+        padding-top: 40px;
+        padding-bottom: 40px;
+
+        gap: 20px;
+    }
+}
