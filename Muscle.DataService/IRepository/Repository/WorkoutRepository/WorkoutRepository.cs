@@ -49,7 +49,7 @@ namespace Muscle.DataService.IRepository.Repository.WorkoutRepository
         public async Task<IEnumerable<Workout>> GetCurrentByCoachId(int coachId) =>
             await _workouts.Find(x => x.CoachId == coachId && x.StartTime >= DateTime.Now).ToListAsync();
 
-        public async Task<IEnumerable<Workout>> GetByCoachId(int coachId) =>
+        public async Task<IEnumerable<Workout>> GetByCoachId(int coachId) =>    
             await _workouts.Find(x => x.CoachId == coachId).ToListAsync();
 
         public async Task<IEnumerable<Workout>> GetWorkoutsBySubscriptionsIds(IEnumerable<int> subscriptionsIds) =>
