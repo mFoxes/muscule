@@ -1,0 +1,12 @@
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\bin\Debug\net5.0\Muscle.Entities.deps.json
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\bin\Debug\net5.0\Muscle.Entities.dll
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\bin\Debug\net5.0\Muscle.Entities.pdb
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\Muscle.Entities.csproj.AssemblyReference.cache
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\Muscle.Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\Muscle.Entities.AssemblyInfoInputs.cache
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\Muscle.Entities.AssemblyInfo.cs
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\Muscle.Entities.csproj.CoreCompileInputs.cache
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\Muscle.Entities.dll
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\ref\Muscle.Entities.dll
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\Muscle.Entities.pdb
+D:\UniversityProjects\SUBD\Muscle2.0\Muscle\Muscle.Entities\obj\Debug\net5.0\refint\Muscle.Entities.dll
