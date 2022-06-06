@@ -113,3 +113,6 @@
 
 ## Макет Web-приложения:
 Url - https://www.figma.com/file/VU79Wla0mMDLVgfdOf6LrT/Untitled?node-id=0%3A1
+
+## Диаграмма
+![subd_lab1 drawio](https://user-images.githubusercontent.com/65607127/172163042-204d48d3-e3c9-4241-8ebb-11474e4b136d.png)
