@@ -20,7 +20,7 @@ const CoachPage = () => {
       UserService.getCoachesWorkoutsCount(),
     ];
 
-    Promise.all(promises).then((data) => {
+    Promise.all(promises).then((data:any) => {
       data[1].data.shift();
       let temp: IUser[] = [];
       for (let i = 0; i < data[0].data.length; i++) {
@@ -36,9 +36,11 @@ const CoachPage = () => {
 
           description: data[0].data[i].description,
           directionId: data[0].data[i].directionId,
-          CountOfWorkouts: data[1].data[i].CountOfWorkouts,
+          CountOfWorkouts: data[1].data[i].countOfWorkouts,
         });
       }
+      setActive(true);
+      setCoachData(temp);
     });
   }, []);
 
